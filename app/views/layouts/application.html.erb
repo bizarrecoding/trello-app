@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Trello" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to 'TRELLO', tasks_path %></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+    
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <% if user_signed_in? %>
+            <li class="active"><%= link_to current_user.username, edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li class="active"><%= link_to "Salir", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+          <% else %>
+            <li class="active"><%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %></li>
+            <li class="active"><%= link_to "Iniciar Session", new_user_session_path, :class => 'navbar-link'  %></li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>

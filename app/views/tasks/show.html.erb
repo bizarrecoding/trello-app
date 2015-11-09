@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @task.author %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @task.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @task.duration %>
+  <% if @task.duration > 1%>
+    <%= " hours" %>
+  <%else%>
+    <%= " hour"%>
+  <%end%>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @task.start %>
+</p>
+
+<p>
+  <strong>End:</strong>
+  <%= @task.end %>
+</p>
+
+<p>
+  <strong>Finished:</strong>
+  <%= @task.finished %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

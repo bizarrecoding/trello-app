@@ -1,0 +1,53 @@
+<%= form_for(@task) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!--div class="row">
+    <div class="field large-4 columns">
+      <-%= f.label :author %><br>
+      <-%= f.text_field :author %>
+    </div>
+  </div-->
+  <div class="row">
+    <div class="field large-4 columns">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field large-6 columns">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br>
+    <%= f.datetime_select :start, start_year: DateTime.now.year, :ampm => true, :minute_step => 15%>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br>
+    <%= f.datetime_select :end, start_year: DateTime.now.year, :ampm => true, :minute_step => 15%>
+  </div>
+  <div class="row">
+    <!--div class="field large-2 columns">
+      <-%= f.label :duration %><br>
+      <-%= f.number_field :duration %>
+    </div-->
+    <div class="field large-2 columns end">
+      <%= f.label :finished %><br>
+      <%= f.check_box :finished %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create Task", class: "button small" %>
+  </div>
+  
+<% end %>
