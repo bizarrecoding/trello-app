@@ -15,15 +15,17 @@
 
   <tbody>
     <% @tasks.order('end asc').each do |task| %>
-      <%if task.finished == false && task.end.day < DateTime.now.day %>
-      <tr>
-        <td><%= task.author %></td>
-        <td><%= task.title %></td>
-        <td><%= task.end %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%if (task.finished == false) && (task.end.day <= DateTime.now.day) %>
+        <% if task.end.hour < DateTime.now.hour %>
+          <tr>
+            <td><%= task.author %></td>
+            <td><%= task.title %></td>
+            <td><%= task.end %></td>
+            <td><%= link_to 'Show', task %></td>
+            <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>
@@ -43,14 +45,16 @@
   <tbody>
     <% @tasks.order('end asc').each do |task| %>
       <%if task.finished == false && task.end.day >= DateTime.now.day %>
-      <tr>
-        <td><%= task.author %></td>
-        <td><%= task.title %></td>
-        <td><%= task.end %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <%if task.end.hour >= DateTime.now.hour %>
+          <tr>
+            <td><%= task.author %></td>
+            <td><%= task.title %></td>
+            <td><%= task.end %></td>
+            <td><%= link_to 'Show', task %></td>
+            <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>
