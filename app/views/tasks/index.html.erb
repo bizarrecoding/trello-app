@@ -15,8 +15,7 @@
 
   <tbody>
     <% @tasks.order('end asc').each do |task| %>
-      <%if (task.finished == false) && (task.end.day <= DateTime.now.day) %>
-        <% if task.end.hour < DateTime.now.hour %>
+      <%if (task.finished == false) && (task.end <= DateTime.now) %>
           <tr>
             <td><%= task.author %></td>
             <td><%= task.title %></td>
@@ -25,7 +24,6 @@
             <td><%= link_to 'Edit', edit_task_path(task) %></td>
             <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
       <% end %>
     <% end %>
   </tbody>
@@ -44,8 +42,7 @@
 
   <tbody>
     <% @tasks.order('end asc').each do |task| %>
-      <%if task.finished == false && task.end.day >= DateTime.now.day %>
-        <%if task.end.hour >= DateTime.now.hour %>
+      <%if task.finished == false && task.end >= DateTime.now %>
           <tr>
             <td><%= task.author %></td>
             <td><%= task.title %></td>
@@ -54,7 +51,6 @@
             <td><%= link_to 'Edit', edit_task_path(task) %></td>
             <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
       <% end %>
     <% end %>
   </tbody>
